@@ -1,0 +1,118 @@
+
+
+        -------- Blog_Post_Manager_Bad_design ----------
+
+
+        ---------------------------------
+        | Blog_manager                  |
+        ---------------------------------
+        | -id                           |
+        | -name                         |
+        | -createdAt                    |
+        | -updatedAt                    |
+        | -userId                       |
+        ---------------------------------
+        | + post()                      |
+        | + covert_markdown_to_html()   |
+        | + save_to_db()                |
+        | + generate_seo_metadata()     |
+        | + social_share()              |
+        ---------------------------------
+
+        ** this is bad design . This break solid rule of one reason to change.
+        here blog_manager class has multiple reason to change . 
+
+
+        -------- Blog_Post_Manager_Good_design ----------
+
+
+        ---------------------------------
+        |            PostEntity         |
+        ---------------------------------
+        | -id                           |
+        | -name                         |
+        | -createdAt                    |
+        | -updatedAt                    |
+        | -userId                       |
+        ---------------------------------
+
+
+
+        ---------------------------------
+        |        MarkdownConverter      |
+        ---------------------------------
+        | + convert()                   |
+        ---------------------------------
+
+        @Child Class MarkdownConverter
+        ---------------------------------
+        |  CommonMarkdownConverter      |
+        ---------------------------------
+        | + @override convert()         |
+        ---------------------------------
+
+        @Child Class MarkdownConverter
+        ---------------------------------
+        |  GitHubMarkdownConverter      |
+        ---------------------------------
+        | + @override convert()         |
+        ---------------------------------
+
+
+
+        ---------------------------------
+        |        PostRepository         |
+        ---------------------------------
+        | + save_to_db()                |
+        ---------------------------------
+
+
+        
+        ---------------------------------
+        |    SeoMetadataGenerator       |
+        ---------------------------------
+        | + generate()                  |
+        ---------------------------------
+
+        @Child of SeoMetadataGenerator
+        ---------------------------------
+        |    KeywordSeoGenerator        |
+        ---------------------------------
+        | + generate()                  |
+        ---------------------------------
+
+        @Child of SeoMetadataGenerator
+        ---------------------------------
+        |    AiBasedSeoGenerator        |
+        ---------------------------------
+        | + generate()                  |
+        ---------------------------------
+
+
+
+        ---------------------------------
+        |        SocialShareService     |
+        ---------------------------------
+        | + share()                      |
+        ---------------------------------
+
+        @Child of SocialShareService
+        ---------------------------------
+        |        TwitterShareService     |
+        ---------------------------------
+        | + share()                      |
+        ---------------------------------
+
+        @Child of SocialShareService
+        ---------------------------------
+        |        RedditShareService     |
+        ---------------------------------
+        | + share()                      |
+        ---------------------------------
+
+
+        ---------------------------------
+        |     PostServiceInterface      |
+        ---------------------------------
+        | + post()                      |
+        ---------------------------------
