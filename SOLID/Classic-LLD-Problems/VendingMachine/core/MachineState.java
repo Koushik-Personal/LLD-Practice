@@ -1,0 +1,11 @@
+package core;
+
+enum MachineState {
+    IDLE,
+    MONEY_INSERTED,
+    PRODUCT_SELECTED, 
+    DISPENSING,
+    RETURNING_CHANGE,
+    OUT_OF_SERVICE,
+    MAINTENANCE
+}
