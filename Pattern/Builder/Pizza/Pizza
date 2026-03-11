@@ -1,0 +1,28 @@
+
+
+public class Pizza {
+	
+	// Requeried
+	private final int size;
+	private final int dough;
+	
+
+	// Optional
+	private final boolean chesse;
+	private final boolean pepperoni;
+	private final boolean mushrooms;
+	private final boolean olives;
+	private final boolean extraSauce;
+
+
+	
+	public static class builder {
+		
+
+
+	
+	}
+
+
+
+}
